@@ -4,30 +4,40 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ekh.challenge.barksky.network.OpenWeatherApi
-import ekh.challenge.barksky.network.WeatherObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class OverviewViewModel : ViewModel() {
     private var _response = MutableLiveData<String>()
     val response: LiveData<String>
         get() = _response
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
+
     init {
         getWeatherForCurrentLocation()
     }
 
     private fun getWeatherForCurrentLocation() {
-        OpenWeatherApi.retrofitService.getCurrentWeatherForPoint("41.89", "-87.64").enqueue( object: Callback<WeatherObject> {
-            override fun onFailure(call: Call<WeatherObject>, t: Throwable) {
-                _response.value = t.message.toString()
-            }
 
-            override fun onResponse(call: Call<WeatherObject>, response: Response<WeatherObject>) {
-                var weather = response.body()?.weather?.get(0)?.conditions
-                _response.value = "Hey, it's ${weather}"
+        coroutineScope.launch {
+            var getWeatherDeferred = OpenWeatherApi.retrofitService.getCurrentWeatherForPoint("41.89", "-87.64")
+
+            try {
+                var thing = getWeatherDeferred.await()
+                _response.value = "Hey there, conditions are ${thing.weather.get(0).conditions}"
+            } catch(e: Exception) {
+                _response.value =  "Failure: ${e.message}"
             }
-        })
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }
