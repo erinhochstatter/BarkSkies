@@ -23,7 +23,7 @@ private val retrofit = Retrofit.Builder()
 
 interface  OpenWeatherApiService {
     @GET("data/2.5/weather")
-    fun getCurrentWeatherForPoint(@Query("lat") lat: String, @Query("lon") lon: String, @Query("appid") appId: String = apiKey): Call<String>
+    fun getCurrentWeatherForPoint(@Query("lat") lat: String, @Query("lon") lon: String, @Query("units") units: String = "imperial", @Query("appid") appId: String = apiKey): Call<WeatherObject>
 }
 
 object OpenWeatherApi {
