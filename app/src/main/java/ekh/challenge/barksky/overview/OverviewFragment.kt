@@ -6,10 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 
 import ekh.challenge.barksky.R
+import ekh.challenge.barksky.network.OpenWeatherApi
+import kotlinx.android.synthetic.main.overview_fragment.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class OverviewFragment : Fragment() {
+    var response: String = ""
 
     companion object {
         fun newInstance() = OverviewFragment()
@@ -26,8 +33,7 @@ class OverviewFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(OverviewViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this).get(OverviewViewModel::class.java)
+//        TODO: Bind response data to view
     }
-
 }
