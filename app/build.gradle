@@ -45,8 +45,15 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
 
     //Network
+    // Moshi
+    implementation "com.squareup.moshi:moshi:$version_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
+    implementation "com.squareup.moshi:moshi-adapters:$version_moshi"
+
+    // Retrofit with Moshi Converter
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
-    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
+
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
