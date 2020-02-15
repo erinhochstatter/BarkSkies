@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="main_card_title">
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:height">60dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/cabin</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
 </resources>

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BarkSky</string>
+    <string name="currentConditions">Current Conditions:</string>
+    <string name="feelsLike">Feels like: %1$s.roundToInt()\u00B0</string>
+    <string name="mainCardImageDescription">An image of a dog dressed appropriately for the weather</string>
 </resources>
