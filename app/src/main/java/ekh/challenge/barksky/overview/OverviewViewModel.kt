@@ -14,6 +14,7 @@ import java.lang.Exception
 import kotlin.math.roundToInt
 
 class OverviewViewModel : ViewModel() {
+    //Live Data
     private var _status = MutableLiveData<String>()
     val status: LiveData<String>
         get() = _status
@@ -26,7 +27,7 @@ class OverviewViewModel : ViewModel() {
     val presentation: LiveData<OverviewPresentation>
         get() = _presentation
 
-
+    // Async Handling
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
