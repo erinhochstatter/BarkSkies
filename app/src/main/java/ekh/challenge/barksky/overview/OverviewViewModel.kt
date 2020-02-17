@@ -10,7 +10,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import kotlin.math.roundToInt
 
 class OverviewViewModel : ViewModel() {
@@ -32,10 +31,9 @@ class OverviewViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
     init {
-        getWeatherForCurrentLocation()
     }
 
-    private fun getWeatherForCurrentLocation() {
+    fun getWeatherForCurrentLocation(lat: Float, lng: Float) {
 
         coroutineScope.launch {
             var getWeatherDeferred = OpenWeatherApi.retrofitService.getCurrentWeatherForPoint("41.89", "-87.64")
@@ -50,7 +48,7 @@ class OverviewViewModel : ViewModel() {
         }
     }
 
-    fun setPresentationDetails(temperature: Int, conditions: String) {
+    private fun setPresentationDetails(temperature: Int, conditions: String) {
 
         when {
             conditions == "extreme" || conditions == "rain" || conditions =="wind"->

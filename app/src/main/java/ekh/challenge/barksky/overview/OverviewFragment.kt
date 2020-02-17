@@ -23,6 +23,13 @@ class OverviewFragment : Fragment() {
         val binding = OverviewFragmentBinding.inflate(inflater)
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
+
+        arguments?.let {
+            val safeArgs = OverviewFragmentArgs.fromBundle(it)
+            viewModel.getWeatherForCurrentLocation(safeArgs.latitude, safeArgs.longitude)
+        }
+
+
         return binding.root
     }
 }

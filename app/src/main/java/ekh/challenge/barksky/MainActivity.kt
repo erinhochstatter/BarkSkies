@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.navigation.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
@@ -20,10 +21,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Location services
         verifyPermissions()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getCurrentLocation()
+
         setContentView(R.layout.activity_main)
+
+        // Pass args
+        findNavController(R.id.nav_host_fragment).setGraph(R.navigation.navigation, intent.extras)
+        Log.i("MainActivity", "on create: ${intent.extras}")
     }
 
     private fun verifyPermissions() {
@@ -38,9 +45,12 @@ class MainActivity : AppCompatActivity() {
     fun getCurrentLocation() {
         fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
             if (location != null) {
-                lastLocation = location
+
                 val currentLatLng = LatLng(location.latitude, location.longitude)
-                Log.i("MainActivity", "latLng: ${currentLatLng}")
+                // Send the lat long to the nav controller universe.
+
+                intent.putExtra("latitude", currentLatLng.latitude.toFloat())
+                intent.putExtra("longitude", currentLatLng.longitude.toFloat())
             }
         }
     }
