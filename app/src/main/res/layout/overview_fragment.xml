@@ -138,6 +138,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
+        <!--TODO: Embed this view in a scroll view-->
+        <!--TODO: Add a map view showing the temperatures for the surrounding areas-->
+        <!--TODO: Add navigation CTA to a detailed weather view-->
+        <!--TODO: Add navigation CTA to a forecast view-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
