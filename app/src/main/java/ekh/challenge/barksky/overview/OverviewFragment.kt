@@ -29,7 +29,6 @@ class OverviewFragment : Fragment() {
             viewModel.getWeatherForCurrentLocation(safeArgs.latitude, safeArgs.longitude)
         }
 
-
         return binding.root
     }
 }
